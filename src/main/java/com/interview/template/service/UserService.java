@@ -1,19 +1,15 @@
 package com.interview.template.service;
 
 import com.interview.template.dao.UserDao;
+import com.interview.template.exceptions.ReservedUserNameException;
+import com.interview.template.exceptions.UserAlreadyExitException;
 import com.interview.template.exceptions.UserNotFoundException;
 import com.interview.template.model.UserEntity;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
@@ -31,5 +27,24 @@ public class UserService {
 
 	public void checkUserExists(long id) throws UserNotFoundException {
 		userDao.checkExists(id);
+	}
+        
+        public UserEntity createUser(UserEntity userEntity) throws UserAlreadyExitException, ReservedUserNameException {
+		return userDao.createUser(userEntity);
+	}
+
+	public void deleteUser(long id)
+	{
+		userDao.deleteUser(id);
+	}
+
+	/**
+	 *
+	 * @param username
+	 * @return
+	 */
+	public List<UserEntity> searchUserByName(String username)
+	{
+		return userDao.searchUserByName(username);
 	}
 }
