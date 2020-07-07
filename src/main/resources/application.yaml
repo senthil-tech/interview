@@ -10,3 +10,7 @@ spring:
         jdbc:
           lob:
             non_contextual_creation: true
+userblacklist:
+ - admin
+ - administrator
+ - root
